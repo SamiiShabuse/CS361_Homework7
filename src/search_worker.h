@@ -18,7 +18,7 @@ void workerThreadFunc(
     channel<std::filesystem::path>* fileChan,
     channel<Match>* resultChan,
     const std::string& target
-)
+);
 
 // Printer thread entry point
 void printerThreadFunc(
