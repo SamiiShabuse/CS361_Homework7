@@ -3,9 +3,7 @@
 #include <filesystem>
 #include <set> 
 
-namespace fs = std::filesystem;
-
-static bool hasValidExtension(const fs::path& p) {
+static bool hasValidExtension(const std::filesystem::path& p) {
     static const std::set<std::string> validExtensions = {
         ".cc", ".c", ".cpp", ".h", ".hpp", ".pl", ".sh", ".py", ".txt"
     };
@@ -18,7 +16,7 @@ void producerThreadFunc(
     channel<std::filesystem::path>* fileChan
 ) {
     try {
-        for (const auto& entry : fs::recursive_directory_iterator(rootDir)) {
+        for (const auto& entry : std::filesystem::recursive_directory_iterator(rootDir)) {
             if (entry.is_regular_file() && hasValidExtension(entry.path())) {
                 fileChan->send(entry.path());
             }
