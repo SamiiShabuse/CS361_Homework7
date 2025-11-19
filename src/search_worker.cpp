@@ -3,12 +3,12 @@
 #include <iostream>
 
 // Helper: search a single file for the target
-static void seachFileForTarget(
+static void searchFileForTarget(
     const std::filesystem::path& filePath,
     const std::string& target,
     channel<Match>* resultChan
 ) {
-    // TODO: Implement file searching logic line by line
+    // Implement file searching logic line by line
     std::ifstream file(filePath);
     if (!file.is_open()) {
         return; // Could not open file due to permissions or other issues
@@ -30,15 +30,15 @@ static void seachFileForTarget(
 }
 
 // Worker Thread
-void workThreadFunc(
+void workerThreadFunc(
     channel<std::filesystem::path>* fileChan,
-    channel<std::filesystem::path>* resultChan,
+    channel<Match>* resultChan,
     const std::string& target
 ) {
     while (true) {
         try {
             auto filePath = fileChan->receive();
-            seachFileForTarget(filePath, target, resultChan);
+            searchFileForTarget(filePath, target, resultChan);
         } catch (...) {
             // Assume exception means channel is closed
             break;
@@ -47,7 +47,7 @@ void workThreadFunc(
 }
 
 // Printer thread to display results
-void printerThreadFunc(channel<std::filesystem::path>* resultChan) {
+void printerThreadFunc(channel<Match>* resultChan) {
     try {
         while (true) {
             Match m = resultChan->receive();
