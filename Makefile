@@ -1,13 +1,23 @@
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++17 -O2
+CXXFLAGS = -std=c++17 -O2
 BIN = bin/search
-SRC = src/search.cpp src/channel.h
+
+# Gather all .cpp sources in src/
+SRCS := $(wildcard src/*.cpp)
+
+# Place object files in obj/ directory
+OBJS := $(patsubst src/%.cpp,obj/%.o,$(SRCS))
 
 all: $(BIN)
 
-$(BIN): $(SRC)
+$(BIN): $(OBJS)
 	@mkdir -p bin
-	$(CXX) $(CXXFLAGS) -o $(BIN) src/search.cpp
+	$(CXX) $(CXXFLAGS) -o $(BIN) $(OBJS)
+
+# Put object files into obj/ but compile from src/%.cpp
+obj/%.o: src/%.cpp
+	@mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	rm -rf bin
+	rm -rf bin obj
