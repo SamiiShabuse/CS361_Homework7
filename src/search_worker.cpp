@@ -2,13 +2,25 @@
 #include <fstream>
 #include <iostream>
 
-// Helper: search a single file for the target
+/**
+ * @brief Search a file for the target string and send matches to the result channel
+ * 
+ * @param filePath The path of the file to search
+ * @param target The target string to search for
+ * @param resultChan The channel to send Match objects through
+ * 
+ * @return void
+ * 
+ * @details This function opens the specified file and reads it line by line.
+ * For each line that contains the target string, it creates a Match object
+ * and sends it through the provided result channel.
+ */
 static void searchFileForTarget(
     const std::filesystem::path& filePath,
     const std::string& target,
     channel<Match>* resultChan
 ) {
-    // Implement file searching logic line by line
+    // file searching logic line by line
     std::ifstream file(filePath);
     if (!file.is_open()) {
         return; // Could not open file due to permissions or other issues
@@ -29,7 +41,19 @@ static void searchFileForTarget(
     }
 }
 
-// Worker Thread
+/**
+ * @brief Worker thread to process files from the file channel and search for the target string
+ * 
+ * @param fileChan The channel to receive file paths from
+ * @param resultChan The channel to send Match objects through
+ * @param target The target string to search for
+ * 
+ * @return void
+ * 
+ * @details This function continuously receives file paths from the file channel,
+ * searches each file for the target string using the searchFileForTarget helper,
+ * and sends any matches to the result channel. It stops when the file channel is closed.
+ */
 void workerThreadFunc(
     channel<std::filesystem::path>* fileChan,
     channel<Match>* resultChan,
@@ -46,7 +70,16 @@ void workerThreadFunc(
     }
 }
 
-// Printer thread to display results
+/**
+ * @brief Printer thread to receive Match objects from the result channel and print them
+ * 
+ * @param resultChan The channel to receive Match objects from
+ * 
+ * @return void
+ * 
+ * @details This function continuously receives Match objects from the result channel
+ * and prints their details to the console. It stops when the result channel is closed.
+ */
 void printerThreadFunc(channel<Match>* resultChan) {
     try {
         while (true) {

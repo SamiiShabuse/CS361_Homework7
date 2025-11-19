@@ -7,7 +7,20 @@
 #include "producer.h"
 #include "search_worker.h"
 
-
+/**
+ * @brief Main function to set up and run the multi-threaded search application
+ * 
+ * @param argc Argument count
+ * @param argv Argument vector
+ * 
+ * @return int Exit status
+ * 
+ * @details This function parses command-line arguments to determine the target
+ * string and root directory for the search. It sets up channels for file paths
+ * and search results, starts the producer thread, a pool of worker threads, and
+ * a printer thread. It waits for all threads to complete before cleaning up
+ * and exiting.
+ */
 int main(int argc, char* argv[]) {
     if (argc < 2) {
         std::cerr << "Usage: bin/search <target> [directory]" << std::endl;
@@ -19,9 +32,9 @@ int main(int argc, char* argv[]) {
 
     // Determine number of threads in pool 
     unsigned int hw = std::thread::hardware_concurrency();
-    if (hw < 2) hw = 2; // Minimum 2 threads based on assignments
+    if (hw < 2) hw = 2; // Minimum 2 threads based on assignment
 
-    // Print starter header
+    // Print header
     std::cout << "----- Search Started -----\n";
     std::cout << "Target Folder: " << rootDir.string() << "\n";
     std::cout << "Target Text: " << target << "\n";
