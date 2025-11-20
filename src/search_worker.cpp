@@ -86,10 +86,10 @@ void printerThreadFunc(channel<Match>* resultChan) {
             Match m = resultChan->receive();
             
             std::cout << "----------" << std::endl;
-            std::cout << "Thread " << m.thread_id << " found a match.\n";
-            std::cout << "File: \"" << m.file_path.string() << "\"\n";
-            std::cout << "Line " << m.line_number << ": " << m.line_content << "\n";
-            std::cout << "----------\n";
+            std::cout << "Thread " << m.thread_id << " found a match." << std::endl;
+            std::cout << "File: \"" << m.file_path.string() << "\"" << std::endl;
+            std::cout << "Line " << m.line_number << ": " << m.line_content << std::endl;
+            std::cout << "----------" << std::endl;
         }
     } catch (...) {
         // Assume exception means channel is closed

@@ -35,10 +35,10 @@ int main(int argc, char* argv[]) {
     if (hw < 2) hw = 2; // Minimum 2 threads based on assignment
 
     // Print header
-    std::cout << "----- Search Started -----\n";
-    std::cout << "Target Folder: " << rootDir.string() << "\n";
-    std::cout << "Target Text: " << target << "\n";
-    std::cout << "Using a Pool of " << hw << " threads to search.\n";
+    std::cout << "----- Search Started -----" << std::endl;
+    std::cout << "Target Folder: " << rootDir.string() << std::endl;
+    std::cout << "Target Text: " << target << std::endl;
+    std::cout << "Using a Pool of " << hw << " threads to search." << std::endl;
 
     // Create channels
     channel<std::filesystem::path>* fileChan = makeChannel<std::filesystem::path>(/*buffer size*/ 64);
@@ -89,6 +89,6 @@ int main(int argc, char* argv[]) {
     delete resultChan;
 
     // Print completion footer
-    std::cout << "----- Search Complete -----\n";
+    std::cout << "----- Search Complete -----" << std::endl;
     return 0;
 }
