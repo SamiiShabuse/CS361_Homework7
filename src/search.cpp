@@ -1,3 +1,21 @@
+/**
+ * @file src/search.cpp
+ * 
+ * @brief Implementation of the main function to set up and run the multi-threaded search application.
+ * 
+ * @author Samii Shabuse <sus24@drexel.edu>
+ * @date November 20, 2025
+ * 
+ * @section Overview
+ * 
+ * This file contains the implementation of the main function that
+ * parses command-line arguments to determine the target string and root
+ * directory for the search. It sets up channels for file paths and search
+ * results, starts the producer thread, a pool of worker threads, and a
+ * printer thread. It waits for all threads to complete before cleaning up
+ * and exiting.
+ */
+
 #include <iostream>
 #include <string>
 #include <thread>

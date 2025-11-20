@@ -1,3 +1,20 @@
+/**
+ * @file src/search_worker.h
+ * 
+ * @brief Declaration of worker and printer thread functions for searching files
+ * 
+ * @author Samii Shabuse <sus24@drexel.edu>
+ * @date November 20, 2025
+ * 
+ * @section Overview
+ * 
+ * This file contains the declaration of the worker thread function that
+ * processes file paths received from a channel, searches each file for a
+ * specified target string, and sends any matches to a result channel. It also
+ * includes the declaration of the printer thread function that receives
+ * Match objects from the result channel and prints their details to the console.
+ */
+
 #ifndef SEARCH_WORKER_H
 #define SEARCH_WORKER_H
 

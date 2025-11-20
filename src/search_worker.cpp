@@ -1,3 +1,22 @@
+/**
+ * @file src/search_worker.cpp
+ * 
+ * @brief Implementation of worker and printer thread functions for searching files
+ *        for a target string and printing the results.
+ * 
+ * @author Samii Shabuse <sus24@drexel.edu>
+ * @date November 20, 2025
+ * 
+ * @section Overview
+ * 
+ * This file contains the implementation of the worker thread function that
+ * processes file paths received from a channel, searches each file for a
+ * specified target string, and sends any matches to a result channel. It also
+ * includes the implementation of the printer thread function that receives
+ * Match objects from the result channel and prints their details to the console.
+ */
+
+
 #include "search_worker.h"
 #include <fstream>
 #include <iostream>

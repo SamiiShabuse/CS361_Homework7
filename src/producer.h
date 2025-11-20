@@ -1,3 +1,21 @@
+/**
+ * @file src/producer.h
+ * 
+ * @brief Declaration of the producer thread function to traverse directories
+ *       and send file paths through a channel.
+ * 
+ * @author Samii Shabuse <sus24@drexel.edu>
+ * @date November 20, 2025
+ * 
+ * @section Overview
+ * 
+ * This file contains the declaration of the producer thread function
+ * that recursively traverses a specified root directory, checks for files
+ * with valid extensions, and sends their paths through a provided channel.
+ * Once the traversal is complete, the channel is closed to signal that no
+ * more files will be sent.
+ */
+
 #ifndef PRODUCER_H
 #define PRODUCER_H
 
